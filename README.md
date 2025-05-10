@@ -16,7 +16,7 @@ Funktionen:
 ---
 
 ### REPOSITORY-STRUKTUR
-
+"""
 / Core Data Services
     / Data Definitions
         zcust_geo_analysis.ddlsource
@@ -41,7 +41,7 @@ Funktionen:
 / Texts
     / Message Classes
         zcl_message_nf
-
+"""
 
 
 ### Voraussetzungen
