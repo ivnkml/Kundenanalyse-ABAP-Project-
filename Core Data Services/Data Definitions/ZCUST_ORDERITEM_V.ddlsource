@@ -1,0 +1,21 @@
+@AbapCatalog.sqlViewName: 'ZCUST_ORDERITEMV'
+@AbapCatalog.compiler.compareFilter: true
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'CDS for order item table'
+@Metadata.ignorePropagatedAnnotations: true
+define view ZCUST_ORDERITEM_V as select from zcust_order_item as item
+    association [1..1] to zcust_order as _order on _order.order_id = item.order_id
+    association [1..1] to zcust_product as _product on _product.product_id = item.product_id
+    
+{
+   
+    key item.order_id,
+    key item.item_id,
+    item.product_id,
+    item.quantity,
+    item.price,
+    item.total_price,
+    item.currency,
+    _order.customer_id,
+    _product.product_name
+}

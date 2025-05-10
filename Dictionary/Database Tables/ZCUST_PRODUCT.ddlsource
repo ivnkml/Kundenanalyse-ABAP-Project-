@@ -1,0 +1,17 @@
+@EndUserText.label : 'Table with goods'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #ALLOWED
+define table zcust_product {
+
+  key mandt      : abap.clnt not null;
+  key product_id : abap.char(10) not null;
+  product_name   : abap.char(50) not null;
+  category       : abap.char(30);
+  currency       : abap.cuky;
+  price          : abap.dec(15,2);
+  stock_qty      : abap.int4;
+  created_on     : abap.dats;
+
+}

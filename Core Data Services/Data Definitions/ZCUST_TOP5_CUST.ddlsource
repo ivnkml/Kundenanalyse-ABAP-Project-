@@ -1,0 +1,43 @@
+@AbapCatalog.sqlViewName: 'ZCUST_TOP5CUST'
+@AbapCatalog.compiler.compareFilter: true
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Top 5 customers'
+@Metadata.ignorePropagatedAnnotations: true
+define view ZCUST_TOP5_CUST
+         as select from zcust_order_item as oi
+            inner join zcust_order as o on oi.order_id = o.order_id
+            inner join zcust_customer as c on o.customer_id = c.customer_id 
+        
+{
+    
+    c.customer_id as CustomerId,
+    c.name as CustomerName,
+  
+    sum( 
+    
+        case
+            when oi.quantity is not null
+            then oi.quantity * oi.price
+            else 0
+            
+        end
+            
+        
+    ) as TotalRevenue
+    
+}
+
+group by 
+    c.customer_id,
+    c.name
+
+//    DATA(lt_top5) = VALUE zcust_customer_revenue_tt( ).
+//
+//SELECT
+//  customerid,
+//  customername,
+//  totalrevenue
+//  FROM zcust_customer_revenue
+//  ORDER BY totalrevenue DESC
+//  INTO TABLE @lt_top5
+//  LIMIT 5. 

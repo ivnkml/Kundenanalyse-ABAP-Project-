@@ -1,0 +1,17 @@
+@EndUserText.label : 'Order item table'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #ALLOWED
+define table zcust_order_item {
+
+  key mandt    : abap.clnt not null;
+  key order_id : abap.char(10) not null;
+  key item_id  : abap.char(10) not null;
+  product_id   : abap.char(10);
+  quantity     : abap.int4;
+  price        : abap.dec(15,2);
+  total_price  : abap.dec(15,2);
+  currency     : abap.cuky;
+
+}

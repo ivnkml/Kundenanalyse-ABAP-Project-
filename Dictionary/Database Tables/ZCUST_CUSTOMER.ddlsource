@@ -1,0 +1,15 @@
+@EndUserText.label : 'Basic information of clients'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #ALLOWED
+define table zcust_customer {
+
+  key mandt       : abap.clnt not null;
+  key customer_id : abap.char(10) not null;
+  name            : abap.char(50);
+  email           : abap.char(50);
+  country         : abap.char(3);
+  customer_type   : abap.char(10);
+
+}

@@ -1,0 +1,19 @@
+@AbapCatalog.sqlViewName: 'ZCUST_GEOANALYS'
+@AbapCatalog.compiler.compareFilter: true
+
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Geographic order analysis'
+@Metadata.ignorePropagatedAnnotations: true
+define view ZCUST_GEO_ANALYSIS as
+             select from zcust_customer as Customer
+             inner join zcust_order as Orders on Orders.customer_id = Customer.customer_id
+{
+    
+    key Customer.country,
+    
+    count( distinct Orders.order_id ) as OrderCount,
+    sum( Orders.total_price ) as TotalRevenue
+    
+}
+
+group by Customer.country
