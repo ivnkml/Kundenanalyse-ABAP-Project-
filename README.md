@@ -1,4 +1,4 @@
-## Kundenanalyse-ABAP-Project-
+### Kundenanalyse-ABAP-Project
 Dieses Repository enthält ein Leichtgewichtiges ABAP-Projekt für Analytics auf Basis eigener Tabellen und CDS-Views.
 
 Funktionen:
@@ -44,10 +44,10 @@ Funktionen:
 
 
 
-## Voraussetzungen
+### Voraussetzungen
 - ADT in Eclipse
 
-## Weiterentwicklung
+### Weiterentwicklung
 - Datumsfilter (Monat/Jahr) in CDS-Views hinzufügen
 - Unit-Test
 - Fiori-UI auf Basis der CDS-Views entwickeln
