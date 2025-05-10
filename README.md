@@ -14,7 +14,7 @@ Funktionen:
 
 - Abfrage von Kunden-Bestellungen und Top-Produkten über Konsole/ADT
 
----
+--
 
 ## REPOSITORY-STRUKTUR
 
