@@ -13,7 +13,7 @@ define view ZCUST_TOP5_CUST
     c.customer_id as CustomerId,
     c.name as CustomerName,
   
-    sum( 
+    sum(                                                                             // calculate total revenue per customer
     
         case
             when oi.quantity is not null
@@ -28,8 +28,8 @@ define view ZCUST_TOP5_CUST
 }
 
 group by 
-    c.customer_id,
-    c.name
+    c.customer_id,                                                                   // group by customer
+    c.name                                                                           // include name in grouping
 
 //    DATA(lt_top5) = VALUE zcust_customer_revenue_tt( ).
 //
