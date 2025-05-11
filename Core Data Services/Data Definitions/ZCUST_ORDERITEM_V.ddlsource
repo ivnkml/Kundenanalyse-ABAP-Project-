@@ -3,19 +3,19 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'CDS for order item table'
 @Metadata.ignorePropagatedAnnotations: true
-define view ZCUST_ORDERITEM_V as select from zcust_order_item as item
-    association [1..1] to zcust_order as _order on _order.order_id = item.order_id
-    association [1..1] to zcust_product as _product on _product.product_id = item.product_id
+define view ZCUST_ORDERITEM_V as select from zcust_order_item as item                             // base table for order items
+    association [1..1] to zcust_order as _order on _order.order_id = item.order_id                // link to order header
+    association [1..1] to zcust_product as _product on _product.product_id = item.product_id      // product master
     
 {
    
-    key item.order_id,
-    key item.item_id,
-    item.product_id,
-    item.quantity,
-    item.price,
-    item.total_price,
-    item.currency,
-    _order.customer_id,
-    _product.product_name
+    key item.order_id,                    // order identifier
+    key item.item_id,                     // line item identifier
+    item.product_id,                      // retrieve product ID
+    item.quantity,                        // retrieve quantity
+    item.price,                           // retrieve unit price
+    item.total_price,                     // retrieve line total
+    item.currency,                        // retrieve currency key
+    _order.customer_id,                   // retrieve customer via association
+    _product.product_name                 // retrieve product name via association
 }
