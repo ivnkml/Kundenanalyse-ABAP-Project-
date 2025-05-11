@@ -17,7 +17,8 @@ CLASS zcl_top_products DEFINITION
 
     TYPES tt_product TYPE STANDARD TABLE OF ty_product WITH EMPTY KEY.
 
-   
+
+* Return top N products by quantity sold
     METHODS get_top_products
       IMPORTING
         iv_max_count TYPE i DEFAULT 5
@@ -34,7 +35,7 @@ CLASS zcl_top_products IMPLEMENTATION.
           ls_row       TYPE ty_product,
           lv_counter   TYPE i VALUE 0.
 
-
+* aggregate and sort products by total quantity
     SELECT
       a~product_id,
       b~product_name,
@@ -49,7 +50,7 @@ CLASS zcl_top_products IMPLEMENTATION.
         total_qty DESCENDING
       INTO TABLE @lt_all.
 
-   
+ * limit to iv_max_count entries  
     LOOP AT lt_all INTO ls_row.
       lv_counter = lv_counter + 1.
       IF lv_counter > iv_max_count.
@@ -64,11 +65,10 @@ CLASS zcl_top_products IMPLEMENTATION.
     DATA lt_top5 TYPE tt_product.
 
 
-    lt_top5 = me->get_top_products( iv_max_count = 5 ).
+    lt_top5 = me->get_top_products( iv_max_count = 5 ).      *  fetch top-5
 
 
-    out->write( lt_top5 ).
+    out->write( lt_top5 ).                                   *  display in console
   ENDMETHOD.
 
 ENDCLASS.  
-1
