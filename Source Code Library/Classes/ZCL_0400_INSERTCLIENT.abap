@@ -35,7 +35,9 @@ CLASS zcl_0400_insertclient IMPLEMENTATION.
 
   DATA lt_customer TYPE TABLE OF zcust_customer.
 
-  DELETE FROM zcust_customer.
+  DELETE FROM zcust_customer.                     *  clear existing data
+
+    * demo customers
 
   lt_customer =  VALUE #(
   ( customer_id = 'CUST001' name = 'Ivan KML'           email = 'ivan@example.com'         country = 'UA' customer_type = 'B2C' )
@@ -74,7 +76,7 @@ CLASS zcl_0400_insertclient IMPLEMENTATION.
 
   INSERT zcust_customer FROM TABLE @lt_customer.
 
-  out->write( |{ lines( lt_customer ) } 'Customer table created'| ).
+  out->write( |{ lines( lt_customer ) } 'Customer table created'| ).              *  feedback
 
   ENDMETHOD.
 
@@ -84,6 +86,7 @@ CLASS zcl_0400_insertclient IMPLEMENTATION.
 
   DELETE FROM zcust_product.
 
+      *  demo products
        lt_products = VALUE #(
       ( mandt = sy-mandt product_id = 'P000001' product_name = 'Laptop Dell XPS 15' category = 'Elektronik' currency = 'EUR' price = 189 stock_qty = 50 created_on = '20240508' )
       ( mandt = sy-mandt product_id = 'P000002' product_name = 'Smartphone Samsung Galaxy S23' category = 'Elektronik' currency = 'EUR' price = 999 stock_qty = 100 created_on = '20240508' )
@@ -130,6 +133,7 @@ CLASS zcl_0400_insertclient IMPLEMENTATION.
 
   DELETE FROM zcust_order.
 
+   *   demo orders
    lt_orders = VALUE #(
   ( mandt = sy-mandt order_id = 'ORD0001' customer_id = 'CUST003' product_id = 'P000005' quantity = 2 order_date = '20240501' currency = 'EUR' total_price = '399.98' )
   ( mandt = sy-mandt order_id = 'ORD0002' customer_id = 'CUST006' product_id = 'P000012' quantity = 1 order_date = '20240502' currency = 'USD' total_price = '149.99' )
@@ -166,6 +170,7 @@ CLASS zcl_0400_insertclient IMPLEMENTATION.
 
   DELETE FROM zcust_order_item.
 
+   *   demo order items
   lt_items = VALUE #(
   ( order_id = 'ORD0001' item_id = '0000000001' product_id = 'P000005' quantity = 2 price = '199.99' total_price = '399.98' currency = 'EUR' )
   ( order_id = 'ORD0002' item_id = '0000000001' product_id = 'P000012' quantity = 1 price = '149.99' total_price = '149.99' currency = 'USD' )
@@ -196,7 +201,7 @@ CLASS zcl_0400_insertclient IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD if_oo_adt_classrun~main.
-
+* run only one of the fill_ methods at a time
 *    fill_customer( out = out ).
 *    fill_products( out = out ).
 *    fill_orders( out = out ).
