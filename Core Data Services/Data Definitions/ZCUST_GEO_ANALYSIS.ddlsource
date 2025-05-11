@@ -5,15 +5,15 @@
 @EndUserText.label: 'Geographic order analysis'
 @Metadata.ignorePropagatedAnnotations: true
 define view ZCUST_GEO_ANALYSIS as
-             select from zcust_customer as Customer
-             inner join zcust_order as Orders on Orders.customer_id = Customer.customer_id
+             select from zcust_customer as Customer                                            // Base table: customers
+             inner join zcust_order as Orders on Orders.customer_id = Customer.customer_id     // Join to orders placed by customers
 {
     
-    key Customer.country,
+    key Customer.country,                                                                      // Country key for grouping
     
-    count( distinct Orders.order_id ) as OrderCount,
-    sum( Orders.total_price ) as TotalRevenue
+    count( distinct Orders.order_id ) as OrderCount,                                           // Number of unique orders per country
+    sum( Orders.total_price ) as TotalRevenue                                                  // Total revenue generated per country
     
 }
 
-group by Customer.country
+group by Customer.country                                                                      // Group results by country
