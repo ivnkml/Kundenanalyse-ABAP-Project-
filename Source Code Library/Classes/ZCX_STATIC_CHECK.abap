@@ -6,12 +6,13 @@ CLASS zcx_static_check DEFINITION
 
   PUBLIC SECTION.
 
-    DATA: message_text TYPE string.
+    DATA: message_text TYPE string.                   *  holds custom error message
+
 
     METHODS:
         constructor
             IMPORTING
-                iv_msg TYPE string.
+                iv_msg TYPE string.                   * message text passed by caller
 
 
   PROTECTED SECTION.
@@ -24,8 +25,8 @@ CLASS zcx_static_check IMPLEMENTATION.
 
     METHOD constructor ##ADT_SUPPRESS_GENERATION.
 
-        super->constructor( ).
-        me->message_text = iv_msg.
+        super->constructor( ).                        * call base exception constructor
+        me->message_text = iv_msg.                    * store custom message
 
 
     ENDMETHOD.
