@@ -19,7 +19,8 @@ CLASS zcl_customer_orders DEFINITION
                END OF ty_order,
                tt_orders TYPE TABLE OF ty_order WITH EMPTY KEY.
 
-        METHODS get_customer_orders
+* Retrieve orders and their items for a given customer
+        METHODS get_customer_orders                                         
             IMPORTING
                 iv_customer_id TYPE zcust_order-customer_id
             RETURNING
@@ -39,6 +40,7 @@ CLASS zcl_customer_orders IMPLEMENTATION.
 
     METHOD get_customer_orders.
 
+    * Fetch orders joined with items
         SELECT o~order_id,
                o~customer_id,
                o~order_date,
@@ -50,13 +52,14 @@ CLASS zcl_customer_orders IMPLEMENTATION.
                i~total_price as item_total
 
         FROM zcust_order as o
-        INNER JOIN zcust_order_item AS i ON i~order_id = o~order_id
+        INNER JOIN zcust_order_item AS i ON i~order_id = o~order_id   * join items to orders
         WHERE o~customer_id = @iv_customer_id
         INTO TABLE @rt_orders.
 
        IF rt_orders IS INITIAL.
         DATA(lv_msg) = |  Client { iv_customer_id } has no orders. |.
 
+      * Raise exception if no records found
         RAISE EXCEPTION TYPE ZCX_STATIC_CHECK
             EXPORTING
                 iv_msg = lv_msg.
